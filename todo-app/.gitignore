@@ -1,0 +1,8 @@
+.DS_store
+node_modules
+.vscode
+*lock.json
+*.lock
+yarn-error.log
+*.tar
+meta/store/@gluestack/glue-plugin-deploy
