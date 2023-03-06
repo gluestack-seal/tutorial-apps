@@ -1,0 +1,33 @@
+table:
+  name: users
+  schema: public
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        id: X-HASURA-USER-ID
+      set:
+        id: X-HASURA-USER-ID
+      columns: '*'
+select_permissions:
+  - role: user
+    permission:
+      columns: '*'
+      filter:
+        id: X-HASURA-USER-ID
+      limit: 10
+      allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns: '*'
+      filter:
+        id: X-HASURA-USER-ID
+      check: null
+      set:
+        updated_at: NOW()
+delete_permissions:
+  - role: user
+    permission:
+      filter:
+        id: X-HASURA-USER-ID

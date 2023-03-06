@@ -1,0 +1,23 @@
+{
+  "@gluestack/glue-plugin-engine": {
+    "package": "node_modules/@gluestack/glue-plugin-engine"
+  },
+  "@gluestack/glue-plugin-router-nginx": {
+    "package": "node_modules/@gluestack/glue-plugin-router-nginx"
+  },
+  "@gluestack/glue-plugin-postgres": {
+    "package": "node_modules/@gluestack/glue-plugin-postgres"
+  },
+  "@gluestack/glue-plugin-graphql": {
+    "package": "node_modules/@gluestack/glue-plugin-graphql"
+  },
+  "@gluestack/glue-plugin-web": {
+    "package": "node_modules/@gluestack/glue-plugin-web"
+  },
+  "@gluestack/glue-plugin-backend-engine": {
+    "package": "node_modules/@gluestack/glue-plugin-backend-engine"
+  },
+  "@gluestack/glue-plugin-auth": {
+    "package": "node_modules/@gluestack/glue-plugin-auth"
+  }
+}

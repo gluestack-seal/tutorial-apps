@@ -1,0 +1,84 @@
+version: "3.9"
+services:
+  auth:
+    container_name: auth
+    restart: always
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/backend/services/auth
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/backend/services/auth:/server
+      - /server/node_modules
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/backend/services/auth/.env
+  engine:
+    container_name: engine
+    restart: always
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/backend/engine
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/backend/engine:/server
+      - /server/node_modules
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/backend/engine/.env
+  graphql:
+    container_name: graphql
+    restart: always
+    image: hasura/graphql-engine:v2.16.1
+    ports:
+      - 8080:8080
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/backend/services/graphql:/hasura
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/backend/services/graphql/.env
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - timeout 1s bash -c ':> /dev/tcp/127.0.0.1/8080' || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    depends_on:
+      postgres:
+        condition: service_healthy
+  nginx:
+    container_name: nginx
+    restart: always
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/meta/router/nginx
+    ports:
+      - 10088:10088
+      - 7003:7003
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/meta/router/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      graphql:
+        condition: service_healthy
+  todoweb:
+    container_name: todoweb
+    restart: unless-stopped
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/todo-web
+    ports:
+      - 3100:9000
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth:/gluestack
+      - /gluestack/todo-web/node_modules/
+      - /gluestack/todo-web/.next/
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/todo-web/.env
+  postgres:
+    container_name: postgres
+    restart: always
+    image: postgres:12
+    ports:
+      - 5432:5432
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth/backend/databases/postgres/db:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespass
+      POSTGRES_DB: todo_db_auth
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - psql -U postgres -d todo_db_auth
+      interval: 10s
+      timeout: 10s
+      retries: 50
+      start_period: 30s
