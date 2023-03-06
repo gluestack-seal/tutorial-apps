@@ -1,0 +1,52 @@
+mutation InsertTodo($title: String!, $is_completed: Boolean!) {
+  insert_todos(objects: { title: $title, is_completed: $is_completed }) {
+    returning {
+      id
+      title
+      is_completed
+      created_at
+      updated_at
+    }
+  }
+}
+
+query FetchTodos {
+  todos {
+    id
+    title
+    is_completed
+    created_at
+    updated_at
+  }
+}
+
+mutation UpdateTodo($id: Int!, $title: String, $is_completed: Boolean) {
+  update_todos_by_pk(
+    pk_columns: { id: $id }
+    _set: { title: $title, is_completed: $is_completed }
+  ) {
+    id
+    created_at
+    is_completed
+    title
+    updated_at
+  }
+}
+
+mutation DeleteTodo($id: Int!) {
+  delete_todos_by_pk(id: $id) {
+    id
+  }
+}
+
+mutation DeleteTodos {
+  delete_todos(where: { is_completed: { _eq: true } }) {
+    affected_rows
+  }
+}
+
+mutation ToggleTodos($is_completed: Boolean!) {
+  update_todos(_set: { is_completed: $is_completed }, where: {}) {
+    affected_rows
+  }
+}

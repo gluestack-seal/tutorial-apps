@@ -10,13 +10,13 @@
  */
 module.exports = () => [
   {
-    server_name: "todo-web"
+    server_name: "todoweb"
   },
   {
     path: '/(.*)',
     proxy: {
       path: '/$1',
-      instance: "todo-web:9000",
+      instance: "todoweb:9000",
     },
     size_in_mb: '50',
   },

@@ -8,5 +8,12 @@ module.exports = () => [
       "instance": "graphql:8080",
       "path": "/v1/graphql"
     }
+  },
+  {
+    "path": "/backend/hasura/(.*)",
+    "proxy": {
+      "instance": "graphql:8080",
+      "path": "/$1"
+    }
   }
 ];

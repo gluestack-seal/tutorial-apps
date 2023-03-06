@@ -17,6 +17,42 @@
           }
         ],
         "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app/backend/services/graphql"
+      },
+      {
+        "path": "/backend/hasura/(.*)",
+        "proxy_instance": "graphql:8080",
+        "proxy_path": "/$1",
+        "size_in_mb": 50,
+        "packageName": "@gluestack/glue-plugin-graphql",
+        "instance": "graphql",
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/v1/graphql"
+          }
+        ],
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app/backend/services/graphql"
+      }
+    ]
+  },
+  {
+    "domain": "todoweb.local.gluestack.app",
+    "port": 7002,
+    "locations": [
+      {
+        "path": "/(.*)",
+        "proxy_instance": "todoweb:9000",
+        "proxy_path": "/$1",
+        "size_in_mb": "50",
+        "packageName": "@gluestack/glue-plugin-web",
+        "instance": "todoweb",
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/"
+          }
+        ],
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app/todo-web"
       }
     ]
   }
