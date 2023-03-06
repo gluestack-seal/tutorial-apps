@@ -1,0 +1,38 @@
+table:
+  name: todos
+  schema: public
+insert_permissions:
+  - role: guest
+    permission:
+      check: {}
+      columns:
+        - id
+        - title
+        - is_completed
+        - created_at
+        - updated_at
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - is_completed
+        - id
+        - title
+        - created_at
+        - updated_at
+      filter: {}
+update_permissions:
+  - role: guest
+    permission:
+      columns:
+        - is_completed
+        - id
+        - title
+        - created_at
+        - updated_at
+      filter: {}
+      check: null
+delete_permissions:
+  - role: guest
+    permission:
+      filter: {}
