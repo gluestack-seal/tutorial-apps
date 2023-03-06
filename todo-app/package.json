@@ -19,13 +19,15 @@
     "@gluestack/glue-plugin-engine": "^0.0.x",
     "@gluestack/glue-plugin-graphql": "^0.0.43",
     "@gluestack/glue-plugin-postgres": "^0.0.26",
-    "@gluestack/glue-plugin-router-nginx": "^0.0.x"
+    "@gluestack/glue-plugin-router-nginx": "^0.0.x",
+    "@gluestack/glue-plugin-web": "^0.1.29"
   },
   "peerDependencies": {
     "@gluestack/framework": "^0.0.x"
   },
   "private": true,
   "workspaces": [
-    "backend/services/graphql"
+    "backend/services/graphql",
+    "todo-web"
   ]
 }

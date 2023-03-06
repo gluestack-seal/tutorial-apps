@@ -26,5 +26,12 @@
       "directory": "./backend/services/graphql",
       "container_store": {}
     }
+  ],
+  "@gluestack/glue-plugin-web": [
+    {
+      "instance": "todo-web",
+      "directory": "./todo-web",
+      "container_store": {}
+    }
   ]
 }

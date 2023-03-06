@@ -10,5 +10,8 @@
   },
   "@gluestack/glue-plugin-graphql": {
     "package": "node_modules/@gluestack/glue-plugin-graphql"
+  },
+  "@gluestack/glue-plugin-web": {
+    "package": "node_modules/@gluestack/glue-plugin-web"
   }
 }
