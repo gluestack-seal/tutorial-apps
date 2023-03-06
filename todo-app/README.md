@@ -5,11 +5,11 @@
 # Installation
 
 ```shell
-$ npx create-gluestack-app my-gluestack-app
+$ npx create-gluestack-app@latest todo-app
 
 OR
 
-$ npm init gluestack-app my-gluestack-app
+$ npm init gluestack-app todo-app
 ```
 
 # Commands
@@ -27,14 +27,23 @@ Options:
   -h, --help      display help for command
 
 Commands:
-  hello-world     Prints Hello world!
   help [command]  display help for command
 ```
 
-## hello-world command
+## postgres command
 
 ```shell
-$ node glue hello-world
+$ node glue add postgres postgres
+```
 
-Hello world!
+## graphql command
+
+```shell
+$ node glue add graphql graphql
+```
+
+## web command
+
+```shell
+$ node glue add web todo-web
 ```
