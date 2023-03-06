@@ -167,7 +167,7 @@
   },
   {
     "domain": "todoweb.local.gluestack.app",
-    "port": 7003,
+    "port": 7001,
     "locations": [
       {
         "path": "/(.*)",
