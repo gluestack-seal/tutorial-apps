@@ -12,5 +12,19 @@
       "directory": "./meta/router/nginx",
       "container_store": {}
     }
+  ],
+  "@gluestack/glue-plugin-postgres": [
+    {
+      "instance": "postgres",
+      "directory": "./backend/databases/postgres",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-graphql": [
+    {
+      "instance": "graphql",
+      "directory": "./backend/services/graphql",
+      "container_store": {}
+    }
   ]
 }

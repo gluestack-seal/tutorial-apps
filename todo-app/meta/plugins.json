@@ -4,5 +4,11 @@
   },
   "@gluestack/glue-plugin-router-nginx": {
     "package": "node_modules/@gluestack/glue-plugin-router-nginx"
+  },
+  "@gluestack/glue-plugin-postgres": {
+    "package": "node_modules/@gluestack/glue-plugin-postgres"
+  },
+  "@gluestack/glue-plugin-graphql": {
+    "package": "node_modules/@gluestack/glue-plugin-graphql"
   }
 }

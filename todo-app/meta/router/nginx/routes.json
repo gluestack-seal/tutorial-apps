@@ -1,0 +1,23 @@
+[
+  {
+    "domain": "api.local.gluestack.app",
+    "port": 10088,
+    "locations": [
+      {
+        "path": "/backend/graphql",
+        "proxy_instance": "graphql:8080",
+        "proxy_path": "/v1/graphql",
+        "size_in_mb": 50,
+        "packageName": "@gluestack/glue-plugin-graphql",
+        "instance": "graphql",
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/v1/graphql"
+          }
+        ],
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app/backend/services/graphql"
+      }
+    ]
+  }
+]
