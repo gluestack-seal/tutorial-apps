@@ -4,6 +4,7 @@ mutation InsertTodo($title: String!, $is_completed: Boolean!) {
       id
       title
       is_completed
+      user_id
       created_at
       updated_at
     }
@@ -15,6 +16,7 @@ query FetchTodos {
     id
     title
     is_completed
+    user_id
     created_at
     updated_at
   }
@@ -28,6 +30,7 @@ mutation UpdateTodo($id: Int!, $title: String, $is_completed: Boolean) {
     id
     created_at
     is_completed
+    user_id
     title
     updated_at
   }

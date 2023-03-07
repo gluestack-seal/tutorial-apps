@@ -4,6 +4,7 @@ const express = require("express");
 const locals_1 = require("./locals");
 const routes_1 = require("./routes");
 const session = require('express-session');
+const cors = require("cors");
 class Express {
     /**
      * Initialize the express server
@@ -28,6 +29,7 @@ class Express {
      * Mounts all the defined routes
      */
     mountRoutes() {
+        this.express.use(cors({ exposedHeaders: ["x-hasura-user-token"] }));
         this.express.use(express.json());
         this.express.use(session({ secret: 'app-secret' }));
         this.express.engine("html", require("ejs").renderFile);

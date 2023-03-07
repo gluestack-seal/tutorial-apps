@@ -2,6 +2,7 @@ import * as express from "express";
 import Locals from "./locals";
 import Routes from "./routes";
 const session = require('express-session');
+const cors = require("cors");
 
 class Express {
   /**
@@ -39,6 +40,7 @@ class Express {
    * Mounts all the defined routes
    */
   private mountRoutes(): void {
+    this.express.use(cors({ exposedHeaders: ["x-hasura-user-token"] }));
     this.express.use(express.json());
     this.express.use(session({ secret: 'app-secret' }));
     this.express.engine("html", require("ejs").renderFile);

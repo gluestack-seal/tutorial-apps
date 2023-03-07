@@ -1,8 +1,8 @@
 export interface IProviderProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 export interface IMarkComplete {
-  id: number
-  is_completed: boolean
+  id: number;
+  is_completed: boolean;
 }
