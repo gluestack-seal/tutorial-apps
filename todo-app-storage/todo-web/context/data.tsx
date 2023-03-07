@@ -86,6 +86,15 @@ export const DataProvider = ({ children }: IProviderProps) => {
     }
   }, [data]);
 
+  const toggleTodos = (isChecked: boolean) => {
+    setTodos(todos.map((todo) => {
+     return {
+      ...todo,
+      is_completed: isChecked,
+    }
+    }));
+  };
+
   return (
     <Data.Provider
       value={{
@@ -99,6 +108,7 @@ export const DataProvider = ({ children }: IProviderProps) => {
         deleteCompletedTodos,
         filter,
         setFilter,
+        toggleTodos,
       }}
     >
       {children}

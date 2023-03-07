@@ -95,8 +95,7 @@ services:
     restart: always
     image: minio/mc
     entrypoint: sh
-    command:
-      -c "mc config host add myminio http://minio:9000 gluestack password &&
+    command: -c "mc config host add myminio http://minio:9000 gluestack password &&
       if ! mc ls myminio/public ; then mc mb myminio/public && mc anonymous set
       public myminio/public; fi && if ! mc ls myminio/private ; then mc mb
       myminio/private; fi"

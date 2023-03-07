@@ -73,3 +73,9 @@ mutation DeleteTodos {
     affected_rows
   }
 }
+
+mutation ToggleTodos($is_completed: Boolean!) {
+  update_todos(_set: { is_completed: $is_completed }, where: {}) {
+    affected_rows
+  }
+}
