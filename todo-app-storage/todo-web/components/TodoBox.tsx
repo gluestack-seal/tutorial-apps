@@ -120,7 +120,13 @@ const TodoBox = ({ todo }: { todo: Todos }) => {
             {todo.file_id ? (
               <img alt="" src={fileURL} className="h-8" onClick={showImage} />
             ) : (
-              <BiImage />
+              <span className={`text-2xl cursor-pointer`}>
+                {!todo.file_id && (
+                  <FileUpload id={todo.id}>
+                    <AiOutlineUpload />
+                  </FileUpload>
+                )}
+              </span>
             )}
           </span>
           <span className={`flex-1 ${todo.is_completed && "line-through"}`}>
@@ -130,19 +136,9 @@ const TodoBox = ({ todo }: { todo: Todos }) => {
         <span className="flex absolute right-0 bottom-4">
           <span
             onClick={deleteHandler}
-            className={`${styles.delete}  text-2xl mr-3 cursor-pointer`}
+            className={`${styles.delete} text-2xl mr-3 cursor-pointer`}
           >
             <MdDeleteForever />
-          </span>
-          <span className={`${styles.delete} text-2xl cursor-pointer`}>
-            {!todo.file_id && (
-              <FileUpload id={todo.id}>
-                <AiOutlineUpload />
-              </FileUpload>
-            )}
-          </span>
-          <span className="text-2xl mr-3 cursor-pointer">
-            {todo.file_id && <BiImage onClick={showImage} />}
           </span>
         </span>
       </div>
