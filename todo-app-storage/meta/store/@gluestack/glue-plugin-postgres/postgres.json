@@ -1,0 +1,13 @@
+{
+  "status": "down",
+  "port_number": 5432,
+  "container_id": null,
+  "db_config": {
+    "external": false,
+    "db_name": "todo_db_storage",
+    "username": "postgres",
+    "password": "postgrespass",
+    "db_host": "host.docker.internal",
+    "db_port": "5432"
+  }
+}

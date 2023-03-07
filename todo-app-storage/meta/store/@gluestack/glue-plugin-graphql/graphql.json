@@ -1,0 +1,7 @@
+{
+  "status": "down",
+  "port_number": 8080,
+  "console_port_number": null,
+  "container_id": null,
+  "postgres_instance": "postgres"
+}

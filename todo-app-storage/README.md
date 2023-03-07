@@ -5,11 +5,11 @@
 # Installation
 
 ```shell
-$ npx create-gluestack-app@latest todo-app-auth
+$ npx create-gluestack-app@latest todo-app-storage
 
 OR
 
-$ npm init gluestack-app todo-app-auth
+$ npm init gluestack-app todo-app-storage
 ```
 
 # Commands
@@ -48,10 +48,16 @@ $ node glue add graphql graphql
 $ node glue add backend-engine engine
 ```
 
-## auth command
+## minio command
 
 ```shell
-$ node glue add auth auth
+$ node glue add minio minio
+```
+
+## storage command
+
+```shell
+$ node glue add storage storage
 ```
 
 ## web command

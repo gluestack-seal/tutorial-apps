@@ -1,0 +1,51 @@
+{
+  "@gluestack/glue-plugin-engine": [
+    {
+      "instance": "gluestack-engine",
+      "directory": "",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-router-nginx": [
+    {
+      "instance": "nginx",
+      "directory": "./meta/router/nginx",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-postgres": [
+    {
+      "instance": "postgres",
+      "directory": "./backend/databases/postgres",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-graphql": [
+    {
+      "instance": "graphql",
+      "directory": "./backend/services/graphql",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-backend-engine": [
+    {
+      "instance": "engine",
+      "directory": "./backend/engine",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-minio": [
+    {
+      "instance": "minio",
+      "directory": "./backend/storage/minio",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-storage": [
+    {
+      "instance": "storage",
+      "directory": "./backend/services/storage",
+      "container_store": {}
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "status": "down",
+  "port_number": 10310,
+  "console_port_number": 9160,
+  "container_id": null,
+  "minio_credentials": {
+    "external": false,
+    "username": "gluestack",
+    "password": "password",
+    "admin_end_point": "host.docker.internal",
+    "cdn_end_point": "127.0.0.1",
+    "port": 10310
+  }
+}

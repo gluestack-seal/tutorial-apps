@@ -1,0 +1,7 @@
+{
+  "status": "down",
+  "port_number": 9000,
+  "container_id": null,
+  "minio_instance": "minio",
+  "graphql_instance": "graphql"
+}

@@ -1,0 +1,24 @@
+{
+  "type": "bulk",
+  "args": [
+    {
+      "type": "pg_track_table",
+      "args": {
+        "source": "todo_db_storage",
+        "table": "files"
+      }
+    },
+    {
+      "type": "pg_create_insert_permission",
+      "args": {
+        "table": "files",
+        "source": "todo_db_storage",
+        "role": "guest",
+        "permission": {
+          "check": {},
+          "columns": "*"
+        }
+      }
+    }
+  ]
+}

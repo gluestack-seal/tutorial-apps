@@ -1,0 +1,36 @@
+{
+  "name": "todo-app-storage",
+  "version": "0.0.1",
+  "description": "Create an Application using GlueStack framework",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gluestack/create-gluestack-app"
+  },
+  "keywords": [
+    "npm",
+    "create-gluestack-app"
+  ],
+  "engines": {
+    "node": ">=18 <19"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@gluestack/framework": "^0.0.x",
+    "@gluestack/glue-plugin-backend-engine": "^0.0.51",
+    "@gluestack/glue-plugin-engine": "^0.0.x",
+    "@gluestack/glue-plugin-graphql": "^0.0.43",
+    "@gluestack/glue-plugin-minio": "^0.0.20",
+    "@gluestack/glue-plugin-postgres": "^0.0.26",
+    "@gluestack/glue-plugin-router-nginx": "^0.0.x",
+    "@gluestack/glue-plugin-storage": "^0.0.39"
+  },
+  "peerDependencies": {
+    "@gluestack/framework": "^0.0.x"
+  },
+  "private": true,
+  "workspaces": [
+    "backend/services/graphql",
+    "backend/engine",
+    "backend/services/storage"
+  ]
+}
