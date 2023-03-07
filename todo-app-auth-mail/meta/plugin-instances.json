@@ -1,0 +1,16 @@
+{
+  "@gluestack/glue-plugin-engine": [
+    {
+      "instance": "gluestack-engine",
+      "directory": "",
+      "container_store": {}
+    }
+  ],
+  "@gluestack/glue-plugin-router-nginx": [
+    {
+      "instance": "nginx",
+      "directory": "./meta/router/nginx",
+      "container_store": {}
+    }
+  ]
+}
