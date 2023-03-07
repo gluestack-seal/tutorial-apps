@@ -9,7 +9,6 @@ import { GlueProvider } from "@gluestack/glue-client-sdk-react";
 import glue from "../glue";
 import Toast from "../components/Toast";
 import { AppProvider } from "../context/app";
-import { IToast } from "../interfaces";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

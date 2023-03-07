@@ -11,7 +11,7 @@ mutation InsertTodo($title: String!, $is_completed: Boolean!) {
 }
 
 query FetchTodos {
-  todos {
+  todos(order_by:{id: asc}) {
     id
     title
     is_completed

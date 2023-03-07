@@ -1,6 +1,7 @@
 import express from "express";
 import Locals from "./locals";
 import Routes from "./routes";
+const cors = require("cors");
 
 class Express {
   /**
@@ -38,6 +39,7 @@ class Express {
    * Mounts all the defined routes
    */
   private mountRoutes(): void {
+    this.express.use(cors({}));
     this.express.use(express.json());
     this.express = Routes.storage(this.express);
   }

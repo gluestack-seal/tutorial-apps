@@ -15,7 +15,7 @@ mutation InsertTodo($title: String!, $is_completed: Boolean!) {
 }
 
 query FetchTodos {
-  todos {
+  todos(order_by:{id: asc}) {
     id
     title
     is_completed
@@ -46,10 +46,7 @@ mutation UpdateTodo($id: Int!, $is_completed: Boolean) {
 }
 
 mutation InsertTodoFileId($id: Int!, $file_id: Int) {
-  update_todos_by_pk(
-    pk_columns: { id: $id }
-    _set: { file_id: $file_id}
-  ) {
+  update_todos_by_pk(pk_columns: { id: $id }, _set: { file_id: $file_id }) {
     id
     created_at
     is_completed

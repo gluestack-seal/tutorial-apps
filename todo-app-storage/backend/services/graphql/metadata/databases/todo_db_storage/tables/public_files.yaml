@@ -1,3 +1,55 @@
 table:
   name: files
   schema: public
+insert_permissions:
+  - role: guest
+    permission:
+      check: {}
+      columns:
+        - is_public
+        - id
+        - reference_id
+        - size
+        - etag
+        - mime_type
+        - name
+        - original_name
+        - path
+        - reference_type
+        - created_at
+        - updated_at
+select_permissions:
+  - role: guest
+    permission:
+      columns:
+        - is_public
+        - id
+        - reference_id
+        - size
+        - etag
+        - mime_type
+        - name
+        - original_name
+        - path
+        - reference_type
+        - created_at
+        - updated_at
+      filter: {}
+update_permissions:
+  - role: guest
+    permission:
+      columns:
+        - is_public
+        - id
+        - reference_id
+        - size
+        - etag
+        - mime_type
+        - name
+        - original_name
+        - path
+        - reference_type
+        - created_at
+        - updated_at
+      filter: {}
+      check: null

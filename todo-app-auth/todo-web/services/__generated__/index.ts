@@ -977,7 +977,7 @@ export type InsertTodoMutationResult = Apollo.MutationResult<InsertTodoMutation>
 export type InsertTodoMutationOptions = Apollo.BaseMutationOptions<InsertTodoMutation, InsertTodoMutationVariables>;
 export const FetchTodosDocument = gql`
     query FetchTodos {
-  todos {
+  todos(order_by: {id: asc}) {
     id
     title
     is_completed

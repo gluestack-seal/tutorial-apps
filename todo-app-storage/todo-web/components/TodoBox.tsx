@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MdDeleteForever, MdOutlineCheckBoxOutlineBlank } from "react-icons/md";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { BiImage } from "react-icons/bi";
@@ -22,6 +22,7 @@ const TodoBox = ({ todo }: { todo: Todos }) => {
   const { markComplete, deleteTodo, deleteImage }: any = useData();
 
   const [fileURL, setFileURL] = React.useState("");
+  const [isHidden, setIsHidden] = React.useState(true);
 
   const [deleteTodoGQL] = useDeleteTodoMutation();
   const [updateTodoGQL] = useUpdateTodoMutation();
@@ -67,17 +68,17 @@ const TodoBox = ({ todo }: { todo: Todos }) => {
   };
 
   const showImage = async () => {
-    if (fileURL) {
-      setFileURL("");
-      return;
-    }
-    await getURL(todo?.file?.path || "");
+    setIsHidden((val) => !val);
   };
 
-  const getURL = async (filePath: string) => {
+  const getURL = (filePath: string) => {
     const url = glue.storage.getPublicUrl(filePath);
     setFileURL(url);
   };
+
+  useEffect(() => {
+    getURL(todo?.file?.path || "");
+  }, [todo?.file?.path]);
 
   const deleteTodoImage = async () => {
     try {
@@ -101,6 +102,7 @@ const TodoBox = ({ todo }: { todo: Todos }) => {
         message: "Failed to delete image!",
       });
     }
+    setIsHidden(true)
   };
 
   return (
@@ -112,6 +114,13 @@ const TodoBox = ({ todo }: { todo: Todos }) => {
               <IoMdCheckboxOutline onClick={checkedHandler} />
             ) : (
               <MdOutlineCheckBoxOutlineBlank onClick={checkedHandler} />
+            )}
+          </span>
+          <span className="w-8">
+            {todo.file_id ? (
+              <img alt="" src={fileURL} className="h-8" onClick={showImage} />
+            ) : (
+              <BiImage />
             )}
           </span>
           <span className={`flex-1 ${todo.is_completed && "line-through"}`}>
@@ -137,7 +146,7 @@ const TodoBox = ({ todo }: { todo: Todos }) => {
           </span>
         </span>
       </div>
-      {fileURL && (
+      {!isHidden && (
         <span className="flex flex-col justify-center border-b">
           <img alt="" src={fileURL} height="100%" />
           <span className="flex justify-evenly py-2">
