@@ -101,5 +101,26 @@
         "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/services/storage"
       }
     ]
+  },
+  {
+    "domain": "todoweb.local.gluestack.app",
+    "port": 7002,
+    "locations": [
+      {
+        "path": "/(.*)",
+        "proxy_instance": "todoweb:9000",
+        "proxy_path": "/$1",
+        "size_in_mb": "50",
+        "packageName": "@gluestack/glue-plugin-web",
+        "instance": "todoweb",
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/"
+          }
+        ],
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/todo-web"
+      }
+    ]
   }
 ]

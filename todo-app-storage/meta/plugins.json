@@ -19,5 +19,8 @@
   },
   "@gluestack/glue-plugin-storage": {
     "package": "node_modules/@gluestack/glue-plugin-storage"
+  },
+  "@gluestack/glue-plugin-web": {
+    "package": "node_modules/@gluestack/glue-plugin-web"
   }
 }

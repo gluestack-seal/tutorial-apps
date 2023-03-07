@@ -47,5 +47,12 @@
       "directory": "./backend/services/storage",
       "container_store": {}
     }
+  ],
+  "@gluestack/glue-plugin-web": [
+    {
+      "instance": "todo-web",
+      "directory": "./todo-web",
+      "container_store": {}
+    }
   ]
 }

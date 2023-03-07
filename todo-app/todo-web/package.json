@@ -9,7 +9,7 @@
     "next",
     "tailwind"
   ],
-  "author": "Mayank Pagar",
+  "author": "Shivam Singhal",
   "license": "ISC",
   "scripts": {
     "dev": "next dev",

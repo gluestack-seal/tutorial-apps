@@ -1,0 +1,13 @@
+.delete {
+  display: none;
+}
+
+.todo:hover .delete {
+  display: block;
+}
+
+.toast {
+  position: fixed;
+  top: 0;
+  right: 0;
+}
