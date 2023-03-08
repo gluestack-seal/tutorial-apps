@@ -44,12 +44,21 @@ services:
     build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/meta/router/nginx
     ports:
       - 10088:10088
-      - 7001:7001
+      - 7002:7002
     volumes:
       - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/meta/router/nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       graphql:
         condition: service_healthy
+  nodemailer:
+    container_name: nodemailer
+    restart: always
+    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer
+    volumes:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer:/server
+      - /server/node_modules
+    env_file:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer/.env
   todoweb:
     container_name: todoweb
     restart: unless-stopped

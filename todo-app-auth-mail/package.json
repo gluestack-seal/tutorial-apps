@@ -22,6 +22,7 @@
     "@gluestack/glue-plugin-graphql": "^0.0.43",
     "@gluestack/glue-plugin-postgres": "^0.0.26",
     "@gluestack/glue-plugin-router-nginx": "^0.0.x",
+    "@gluestack/glue-plugin-service-nodemailer": "^0.0.12",
     "@gluestack/glue-plugin-web": "^0.1.30"
   },
   "peerDependencies": {
@@ -32,6 +33,7 @@
     "backend/services/graphql",
     "backend/engine",
     "backend/services/auth",
-    "todo-web"
+    "todo-web",
+    "backend/services/nodemailer"
   ]
 }

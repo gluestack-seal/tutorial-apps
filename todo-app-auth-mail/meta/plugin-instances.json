@@ -47,5 +47,12 @@
       "directory": "./todo-web",
       "container_store": {}
     }
+  ],
+  "@gluestack/glue-plugin-service-nodemailer": [
+    {
+      "instance": "nodemailer",
+      "directory": "./backend/services/nodemailer",
+      "container_store": {}
+    }
   ]
 }

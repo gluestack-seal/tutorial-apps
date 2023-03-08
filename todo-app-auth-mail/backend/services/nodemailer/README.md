@@ -1,0 +1,1 @@
+glue-plugin-service-nodemailer

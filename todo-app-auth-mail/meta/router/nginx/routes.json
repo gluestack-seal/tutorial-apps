@@ -147,12 +147,27 @@
           }
         ],
         "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql"
+      },
+      {
+        "path": "/backend/nodemailer/(.*)",
+        "proxy_instance": "nodemailer:3500",
+        "proxy_path": "/v1.0/invoke/nodemailer/method/$1",
+        "size_in_mb": 50,
+        "packageName": "@gluestack/glue-plugin-service-nodemailer",
+        "instance": "nodemailer",
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/send"
+          }
+        ],
+        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer"
       }
     ]
   },
   {
     "domain": "todoweb.local.gluestack.app",
-    "port": 7001,
+    "port": 7002,
     "locations": [
       {
         "path": "/(.*)",
