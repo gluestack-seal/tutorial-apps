@@ -149,6 +149,65 @@
         "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql"
       },
       {
+        "path": "/backend/authservices/(.*)",
+        "proxy_instance": "authservices:3500",
+        "proxy_path": "/v1.0/invoke/authservices/method/$1",
+        "size_in_mb": 50,
+        "packageName": "@gluestack/glue-plugin-service-node",
+        "instance": "authservices",
+        "routes": [
+          {
+            "method": "POST",
+            "path": "function"
+          },
+          {
+            "method": "GET",
+            "path": "function"
+          },
+          {
+            "method": "PUT",
+            "path": "function"
+          },
+          {
+            "method": "DELETE",
+            "path": "function"
+          },
+          {
+            "method": "POST",
+            "path": "health-check"
+          },
+          {
+            "method": "GET",
+            "path": "health-check"
+          },
+          {
+            "method": "PUT",
+            "path": "health-check"
+          },
+          {
+            "method": "DELETE",
+            "path": "health-check"
+          },
+          {
+            "method": "POST",
+            "path": "user-created"
+          },
+          {
+            "method": "GET",
+            "path": "user-created"
+          },
+          {
+            "method": "PUT",
+            "path": "user-created"
+          },
+          {
+            "method": "DELETE",
+            "path": "user-created"
+          }
+        ],
+        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services"
+      },
+      {
         "path": "/backend/nodemailer/(.*)",
         "proxy_instance": "nodemailer:3500",
         "proxy_path": "/v1.0/invoke/nodemailer/method/$1",

@@ -31,3 +31,21 @@ delete_permissions:
     permission:
       filter:
         id: X-HASURA-USER-ID
+event_triggers:
+  - name: welcome_email
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      interval_sec: 10
+      num_retries: 0
+      timeout_sec: 60
+    webhook: http://host.docker.internal:10088/backend/authservices/user-created
+    cleanup_config:
+      batch_size: 10000
+      clean_invocation_logs: false
+      clear_older_than: 168
+      paused: true
+      schedule: 0 0 * * *
+      timeout: 60
