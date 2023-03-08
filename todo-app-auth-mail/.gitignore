@@ -6,3 +6,4 @@ node_modules
 yarn-error.log
 *.tar
 meta/store/@gluestack/glue-plugin-deploy
+db

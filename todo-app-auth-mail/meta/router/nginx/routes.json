@@ -1,0 +1,174 @@
+[
+  {
+    "domain": "api.local.gluestack.app",
+    "port": 10088,
+    "locations": [
+      {
+        "path": "/backend/auth/(.*)",
+        "proxy_instance": "auth:3500",
+        "proxy_path": "/v1.0/invoke/auth/method/$1",
+        "size_in_mb": 50,
+        "packageName": "@gluestack/glue-plugin-auth",
+        "instance": "auth",
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/authentication/signin"
+          },
+          {
+            "method": "POST",
+            "path": "/authentication/signup"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/me"
+          },
+          {
+            "method": "POST",
+            "path": "/authentication/refresh-jwt-token"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/google"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signup/google"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/google/callback"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/google/callback/success"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/google/callback/failure"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/microsoft"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signup/microsoft"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/microsoft/callback"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/microsoft/callback/success"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/microsoft/callback/failure"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/github"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signup/github"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/github/callback"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/github/callback/success"
+          },
+          {
+            "method": "GET",
+            "path": "/authentication/signin/github/callback/failure"
+          }
+        ],
+        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth"
+      },
+      {
+        "path": "/backend/engine/(.*)",
+        "proxy_instance": "engine:3500",
+        "proxy_path": "/v1.0/invoke/engine/method/$1",
+        "size_in_mb": 50,
+        "packageName": "@gluestack/glue-plugin-backend-engine",
+        "instance": "engine",
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/health-check"
+          },
+          {
+            "method": "POST",
+            "path": "/actions/{action_name}"
+          },
+          {
+            "method": "POST",
+            "path": "/events"
+          },
+          {
+            "method": "POST",
+            "path": "/app/events"
+          },
+          {
+            "method": "POST",
+            "path": "/client/invoke"
+          },
+          {
+            "method": "POST",
+            "path": "/server/invoke"
+          },
+          {
+            "method": "GET",
+            "path": "/glue/config"
+          },
+          {
+            "method": "POST",
+            "path": "/queue/push"
+          }
+        ],
+        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine"
+      },
+      {
+        "path": "/backend/graphql",
+        "proxy_instance": "graphql:8080",
+        "proxy_path": "/v1/graphql",
+        "size_in_mb": 50,
+        "packageName": "@gluestack/glue-plugin-graphql",
+        "instance": "graphql",
+        "routes": [
+          {
+            "method": "POST",
+            "path": "/v1/graphql"
+          }
+        ],
+        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql"
+      }
+    ]
+  },
+  {
+    "domain": "todoweb.local.gluestack.app",
+    "port": 7001,
+    "locations": [
+      {
+        "path": "/(.*)",
+        "proxy_instance": "todoweb:9000",
+        "proxy_path": "/$1",
+        "size_in_mb": "50",
+        "packageName": "@gluestack/glue-plugin-web",
+        "instance": "todoweb",
+        "routes": [
+          {
+            "method": "GET",
+            "path": "/"
+          }
+        ],
+        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/todo-web"
+      }
+    ]
+  }
+]

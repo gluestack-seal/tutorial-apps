@@ -1,0 +1,5 @@
+<h3>Signing in as <%= user %></h3>
+<script>
+  window.opener.postMessage("<%= token %>", "*");
+  window.close();
+</script>
