@@ -158,6 +158,22 @@
         "routes": [
           {
             "method": "POST",
+            "path": "email-response"
+          },
+          {
+            "method": "GET",
+            "path": "email-response"
+          },
+          {
+            "method": "PUT",
+            "path": "email-response"
+          },
+          {
+            "method": "DELETE",
+            "path": "email-response"
+          },
+          {
+            "method": "POST",
             "path": "function"
           },
           {
