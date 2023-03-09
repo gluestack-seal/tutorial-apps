@@ -44,8 +44,8 @@ class SendEmail {
                 // create transporter of nodemailer
                 const transporter = yield SendEmail.CreateTransporter(value.transportOptions);
                 // send email
-                yield transporter.sendMail(mailOptions);
-                return commons_1.default.Response(res, true, 'Email has been sent', {});
+                const response = yield transporter.sendMail(mailOptions);
+                return commons_1.default.Response(res, true, 'Email has been sent', response);
             }
             catch (error) {
                 return commons_1.default.Response(res, false, error.message, {});

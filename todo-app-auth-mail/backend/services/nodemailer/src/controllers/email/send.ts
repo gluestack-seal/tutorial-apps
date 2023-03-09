@@ -35,9 +35,9 @@ class SendEmail {
       const transporter = await SendEmail.CreateTransporter(value.transportOptions);
 
       // send email
-      await transporter.sendMail(mailOptions);
+      const response = await transporter.sendMail(mailOptions);
 
-      return Commons.Response(res, true, 'Email has been sent', {});
+      return Commons.Response(res, true, 'Email has been sent', response);
     } catch (error: any) {
       return Commons.Response(res, false, error.message, {});
     }
