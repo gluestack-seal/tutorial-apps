@@ -8,7 +8,7 @@ services:
       - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth/.env
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth/.env.generated
   engine:
     container_name: engine
     restart: always
@@ -17,7 +17,7 @@ services:
       - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine/.env
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine/.env.generated
   graphql:
     container_name: graphql
     restart: always
@@ -27,7 +27,7 @@ services:
     volumes:
       - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql:/hasura
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql/.env
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql/.env.generated
     healthcheck:
       test:
         - CMD-SHELL
@@ -58,7 +58,7 @@ services:
       - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services/.env
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services/.env.generated
   nodemailer:
     container_name: nodemailer
     restart: always
@@ -67,7 +67,7 @@ services:
       - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer/.env
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer/.env.generated
   todoweb:
     container_name: todoweb
     restart: unless-stopped
@@ -79,7 +79,7 @@ services:
       - /gluestack/todo-web/node_modules/
       - /gluestack/todo-web/.next/
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/todo-web/.env
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/todo-web/.env.generated
   postgres:
     container_name: postgres
     restart: always
