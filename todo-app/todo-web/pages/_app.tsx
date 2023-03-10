@@ -7,6 +7,7 @@ import { createApolloClient } from "../services/apolloClient";
 function MyApp({ Component, pageProps }: AppProps) {
   return (
       <Child>
+        {/* @ts-ignore */}
         <Component {...pageProps} />
       </Child>
   );

@@ -9,6 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <UserProvider>
       <Child>
+        {/* @ts-ignore */}
         <Component {...pageProps} />
       </Child>
     </UserProvider>

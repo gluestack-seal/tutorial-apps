@@ -8,7 +8,7 @@ services:
       - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/engine:/server
       - /server/node_modules
     env_file:
-      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/engine/.env
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/engine/.env.generated
   graphql:
     container_name: graphql
     restart: always
@@ -18,7 +18,7 @@ services:
     volumes:
       - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/services/graphql:/hasura
     env_file:
-      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/services/graphql/.env
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/services/graphql/.env.generated
     healthcheck:
       test:
         - CMD-SHELL
@@ -49,7 +49,7 @@ services:
       - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/services/storage:/server
       - /server/node_modules
     env_file:
-      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/services/storage/.env
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/backend/services/storage/.env.generated
   todoweb:
     container_name: todoweb
     restart: unless-stopped
@@ -61,7 +61,7 @@ services:
       - /gluestack/todo-web/node_modules/
       - /gluestack/todo-web/.next/
     env_file:
-      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/todo-web/.env
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-storage/todo-web/.env.generated
   minio:
     container_name: minio
     restart: always
