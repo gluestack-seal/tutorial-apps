@@ -1,0 +1,102 @@
+version: "3.9"
+services:
+  auth:
+    container_name: auth
+    restart: always
+    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth
+    volumes:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth:/server
+      - /server/node_modules
+    env_file:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth/.env.generated
+  engine:
+    container_name: engine
+    restart: always
+    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine
+    volumes:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine:/server
+      - /server/node_modules
+    env_file:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine/.env.generated
+  graphql:
+    container_name: graphql
+    restart: always
+    image: hasura/graphql-engine:v2.16.1
+    ports:
+      - 8080:8080
+    volumes:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql:/hasura
+    env_file:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql/.env.generated
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - timeout 1s bash -c ':> /dev/tcp/127.0.0.1/8080' || exit 1
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    depends_on:
+      postgres:
+        condition: service_healthy
+  nginx:
+    container_name: nginx
+    restart: always
+    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/meta/router/nginx
+    ports:
+      - 10088:10088
+      - 7001:7001
+    volumes:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/meta/router/nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      graphql:
+        condition: service_healthy
+  authservices:
+    container_name: authservices
+    restart: always
+    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services
+    volumes:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services:/server
+      - /server/node_modules
+    env_file:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services/.env.generated
+  nodemailer:
+    container_name: nodemailer
+    restart: always
+    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer
+    volumes:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer:/server
+      - /server/node_modules
+    env_file:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer/.env.generated
+  todoweb:
+    container_name: todoweb
+    restart: unless-stopped
+    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/todo-web
+    ports:
+      - 3100:9000
+    volumes:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail:/gluestack
+      - /gluestack/todo-web/node_modules/
+      - /gluestack/todo-web/.next/
+    env_file:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/todo-web/.env.generated
+  postgres:
+    container_name: postgres
+    restart: always
+    image: postgres:12
+    ports:
+      - 5433:5432
+    volumes:
+      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/databases/postgres/db:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespass
+      POSTGRES_DB: todo_app_auth_mail
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - psql -U postgres -d todo_app_auth_mail
+      interval: 10s
+      timeout: 10s
+      retries: 50
+      start_period: 30s

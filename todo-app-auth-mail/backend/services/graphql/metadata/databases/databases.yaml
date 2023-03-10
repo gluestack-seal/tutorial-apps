@@ -1,0 +1,8 @@
+- name: todo_app_auth_mail
+  kind: postgres
+  configuration:
+    connection_info:
+      database_url: '{{HASURA_GRAPHQL_METADATA_DATABASE_URL}}'
+      isolation_level: read-committed
+      use_prepared_statements: false
+  tables: "!include todo_app_auth_mail/tables/tables.yaml"
