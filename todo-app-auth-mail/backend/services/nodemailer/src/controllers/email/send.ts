@@ -40,7 +40,13 @@ class SendEmail {
   
       const glue = new Glue((process.env.GLUE_APP_URL || "").replace("localhost", "host.docker.internal"))
 
-      glue.functions.invoke("auth-services", "email-response", { mailOptions: value.mailOptions, response });
+      glue.functions.invoke("authservices", "email-response", { ...value.mailOptions, ...response })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(`Err -->`, err.message);
+      })
 
       return Commons.Response(res, true, 'Email has been sent', response);
     } catch (error: any) {

@@ -32,6 +32,8 @@ module.exports = async (req, res) => {
   }
 
   try {
+    console.log(`invoking ${appId}::${methodName}`);
+    
     const resp = await client.invoker.invoke(
       appId,
       methodName,
