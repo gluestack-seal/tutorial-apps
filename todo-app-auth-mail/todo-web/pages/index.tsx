@@ -14,7 +14,7 @@ const Home: NextPage = () => {
   return (
     <div className="flex min-h-screen flex-col items-center mt-40 py-2 m-0 p-0">
       <Head>
-        <title>Todo App with Auth</title>
+        <title>Todo App with Auth & Mail</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
