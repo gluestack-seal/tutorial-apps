@@ -88,7 +88,7 @@
             "path": "/authentication/signin/github/callback/failure"
           }
         ],
-        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth"
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/auth"
       },
       {
         "path": "/backend/engine/(.*)",
@@ -131,7 +131,7 @@
             "path": "/queue/push"
           }
         ],
-        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine"
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/engine"
       },
       {
         "path": "/backend/graphql",
@@ -146,7 +146,7 @@
             "path": "/v1/graphql"
           }
         ],
-        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql"
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/graphql"
       },
       {
         "path": "/backend/authservices/(.*)",
@@ -221,7 +221,7 @@
             "path": "user-created"
           }
         ],
-        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services"
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/auth-services"
       },
       {
         "path": "/backend/nodemailer/(.*)",
@@ -236,13 +236,13 @@
             "path": "/send"
           }
         ],
-        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer"
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer"
       }
     ]
   },
   {
     "domain": "todoweb.local.gluestack.app",
-    "port": 7002,
+    "port": 7001,
     "locations": [
       {
         "path": "/(.*)",
@@ -257,7 +257,7 @@
             "path": "/"
           }
         ],
-        "instancePath": "/Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/todo-web"
+        "instancePath": "/Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/todo-web"
       }
     ]
   }

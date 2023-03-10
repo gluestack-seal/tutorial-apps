@@ -8,13 +8,13 @@ import Button from "../components/Button";
 import Link from "next/link";
 import { getUser } from "../context/user";
 
-const Home: NextPage = () => {
+const Home = ({ NEXT_APP_NAME }: { NEXT_APP_NAME: string }) => {
   const { user, removeUser }: any = getUser();
 
   return (
     <div className="flex min-h-screen flex-col items-center mt-40 py-2 m-0 p-0">
       <Head>
-        <title>Todo App with Auth & Mail</title>
+        <title>{NEXT_APP_NAME}</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -54,3 +54,11 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps() {
+  return {
+    props: {
+      NEXT_APP_NAME: process.env.NEXT_APP_NAME || "",
+    },
+  };
+}

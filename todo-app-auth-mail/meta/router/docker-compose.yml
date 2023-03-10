@@ -3,21 +3,21 @@ services:
   auth:
     container_name: auth
     restart: always
-    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/auth
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth:/server
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/auth:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth/.env.generated
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/auth/.env.generated
   engine:
     container_name: engine
     restart: always
-    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/engine
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine:/server
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/engine:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/engine/.env.generated
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/engine/.env.generated
   graphql:
     container_name: graphql
     restart: always
@@ -25,9 +25,9 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql:/hasura
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/graphql:/hasura
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/graphql/.env.generated
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/graphql/.env.generated
     healthcheck:
       test:
         - CMD-SHELL
@@ -41,45 +41,45 @@ services:
   nginx:
     container_name: nginx
     restart: always
-    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/meta/router/nginx
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/meta/router/nginx
     ports:
       - 10088:10088
       - 7001:7001
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/meta/router/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/meta/router/nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
       graphql:
         condition: service_healthy
   authservices:
     container_name: authservices
     restart: always
-    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/auth-services
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services:/server
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/auth-services:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/auth-services/.env.generated
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/auth-services/.env.generated
   nodemailer:
     container_name: nodemailer
     restart: always
-    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer:/server
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer:/server
       - /server/node_modules
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer/.env.generated
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer/.env.generated
   todoweb:
     container_name: todoweb
     restart: unless-stopped
-    build: /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/todo-web
+    build: /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/todo-web
     ports:
       - 3100:9000
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail:/gluestack
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail:/gluestack
       - /gluestack/todo-web/node_modules/
       - /gluestack/todo-web/.next/
     env_file:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/todo-web/.env.generated
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/todo-web/.env.generated
   postgres:
     container_name: postgres
     restart: always
@@ -87,7 +87,7 @@ services:
     ports:
       - 5433:5432
     volumes:
-      - /Users/sandeepkumar/code/work/application/gluestack/examples/tutorial-apps/todo-app-auth-mail/backend/databases/postgres/db:/var/lib/postgresql/data/
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app-auth-mail/backend/databases/postgres/db:/var/lib/postgresql/data/
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgrespass
