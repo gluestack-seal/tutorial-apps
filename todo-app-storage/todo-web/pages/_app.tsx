@@ -16,6 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlueProvider glue={glue}>
         <AppProvider>
           <Child>
+            {/* @ts-ignore */}
             <Component {...pageProps} />
           </Child>
         </AppProvider>

@@ -9,7 +9,7 @@ services:
     volumes:
       - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app/backend/services/graphql:/hasura
     env_file:
-      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app/backend/services/graphql/.env
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app/backend/services/graphql/.env.generated
     healthcheck:
       test:
         - CMD-SHELL
@@ -43,7 +43,7 @@ services:
       - /gluestack/todo-web/node_modules/
       - /gluestack/todo-web/.next/
     env_file:
-      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app/todo-web/.env
+      - /Users/shivamsinghal/Sites/projects/gluestack/apps/tutorial-apps/todo-app/todo-web/.env.generated
   postgres:
     container_name: postgres
     restart: always
