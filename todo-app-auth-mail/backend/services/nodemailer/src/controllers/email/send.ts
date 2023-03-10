@@ -2,6 +2,7 @@ import Commons from "../commons";
 import nodemailer from "nodemailer";
 import emailBody from "../../validator/email-body"
 import Template from "../helpers/template";
+import { Glue } from "@gluestack/glue-server-sdk-js";
 
 class SendEmail {
   public static async handle(req: Request, res: Response): Promise<void> {
@@ -36,6 +37,10 @@ class SendEmail {
 
       // send email
       const response = await transporter.sendMail(mailOptions);
+  
+      const glue = new Glue((process.env.GLUE_APP_URL || "").replace("localhost", "host.docker.internal"))
+
+      glue.functions.invoke("auth-services", "email-response", { mailOptions: value.mailOptions, response });
 
       return Commons.Response(res, true, 'Email has been sent', response);
     } catch (error: any) {

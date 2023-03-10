@@ -3,7 +3,7 @@ const { Glue } = require("@gluestack/glue-server-sdk-js");
 module.exports = async (req, res, _next) => {
   const { body } = req;
 
-  const user = body?.event?.data?.new;
+  const user = body?.data?.new;
 
   const emailBody = {
     "mailOptions": {
@@ -12,7 +12,7 @@ module.exports = async (req, res, _next) => {
       "subject": `Welcome ${user.name} `,
       "template": process.env.EMAIL_WELCOME_TEMPLATE,
       "data": {
-        "name": user.name
+        "name": user.name.trim()
       }
     },
     "transportOptions": {
@@ -25,7 +25,7 @@ module.exports = async (req, res, _next) => {
     }
   }
 
-  const glue = new Glue(process.env.GLUE_APP_URL)
+  const glue = new Glue(process.env.GLUE_APP_URL.replace("localhost", "host.docker.internal"))
 
   const result = await glue.queue.add({
     value: `${process.env.EMAIL_SERVICE_NAME}::${process.env.EMAIL_SERVICE_ROUTE}`,

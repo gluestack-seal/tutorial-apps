@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@gluestack/framework": "^0.0.x",
-    "@gluestack/glue-plugin-auth": "^0.0.48",
+    "@gluestack/glue-plugin-auth": "^0.0.49",
     "@gluestack/glue-plugin-backend-engine": "^0.0.51",
     "@gluestack/glue-plugin-engine": "^0.0.89",
     "@gluestack/glue-plugin-graphql": "^0.0.43",
