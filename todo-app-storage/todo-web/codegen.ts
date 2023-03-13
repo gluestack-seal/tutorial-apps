@@ -1,6 +1,6 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
 
-const SCHEMA_URL = process.env.SCHEMA_URL ?? "";
+const SCHEMA_URL = (process.env.SCHEMA_URL ?? "").replaceAll("localhost", "host.docker.internal");
 
 const config: CodegenConfig = {
   schema: {

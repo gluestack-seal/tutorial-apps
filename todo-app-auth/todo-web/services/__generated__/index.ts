@@ -898,12 +898,12 @@ export type InsertTodoMutationVariables = Exact<{
 }>;
 
 
-export type InsertTodoMutation = { __typename?: 'mutation_root', insert_todos?: { __typename?: 'todos_mutation_response', returning: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, created_at: any, updated_at: any }> } | null };
+export type InsertTodoMutation = { __typename?: 'mutation_root', insert_todos?: { __typename?: 'todos_mutation_response', returning: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, created_at: any, updated_at: any, user: { __typename?: 'users', id: number, name: string, email: string, password: string, created_at: any, updated_at: any } }> } | null };
 
 export type FetchTodosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchTodosQuery = { __typename?: 'query_root', todos: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, created_at: any, updated_at: any }> };
+export type FetchTodosQuery = { __typename?: 'query_root', todos: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, created_at: any, updated_at: any, user: { __typename?: 'users', id: number, name: string, email: string, password: string, created_at: any, updated_at: any } }> };
 
 export type UpdateTodoMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -912,7 +912,7 @@ export type UpdateTodoMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTodoMutation = { __typename?: 'mutation_root', update_todos_by_pk?: { __typename?: 'todos', id: number, created_at: any, is_completed: boolean, user_id: number, title: string, updated_at: any } | null };
+export type UpdateTodoMutation = { __typename?: 'mutation_root', update_todos_by_pk?: { __typename?: 'todos', id: number, created_at: any, is_completed: boolean, user_id: number, title: string, updated_at: any, user: { __typename?: 'users', id: number, name: string, email: string, password: string, created_at: any, updated_at: any } } | null };
 
 export type DeleteTodoMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -944,6 +944,14 @@ export const InsertTodoDocument = gql`
       user_id
       created_at
       updated_at
+      user {
+        id
+        name
+        email
+        password
+        created_at
+        updated_at
+      }
     }
   }
 }
@@ -984,6 +992,14 @@ export const FetchTodosDocument = gql`
     user_id
     created_at
     updated_at
+    user {
+      id
+      name
+      email
+      password
+      created_at
+      updated_at
+    }
   }
 }
     `;
@@ -1026,6 +1042,14 @@ export const UpdateTodoDocument = gql`
     user_id
     title
     updated_at
+    user {
+      id
+      name
+      email
+      password
+      created_at
+      updated_at
+    }
   }
 }
     `;

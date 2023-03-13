@@ -83,9 +83,269 @@ export enum Cursor_Ordering {
   Desc = 'DESC'
 }
 
+/** columns and relationships of "emails_histories" */
+export type Emails_Histories = {
+  __typename?: 'emails_histories';
+  created_at: Scalars['timestamptz'];
+  email: Scalars['String'];
+  id: Scalars['Int'];
+  raw_json: Scalars['String'];
+  sent_at: Scalars['timestamptz'];
+  subject: Scalars['String'];
+  updated_at: Scalars['timestamptz'];
+};
+
+/** aggregated selection of "emails_histories" */
+export type Emails_Histories_Aggregate = {
+  __typename?: 'emails_histories_aggregate';
+  aggregate?: Maybe<Emails_Histories_Aggregate_Fields>;
+  nodes: Array<Emails_Histories>;
+};
+
+/** aggregate fields of "emails_histories" */
+export type Emails_Histories_Aggregate_Fields = {
+  __typename?: 'emails_histories_aggregate_fields';
+  avg?: Maybe<Emails_Histories_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Emails_Histories_Max_Fields>;
+  min?: Maybe<Emails_Histories_Min_Fields>;
+  stddev?: Maybe<Emails_Histories_Stddev_Fields>;
+  stddev_pop?: Maybe<Emails_Histories_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Emails_Histories_Stddev_Samp_Fields>;
+  sum?: Maybe<Emails_Histories_Sum_Fields>;
+  var_pop?: Maybe<Emails_Histories_Var_Pop_Fields>;
+  var_samp?: Maybe<Emails_Histories_Var_Samp_Fields>;
+  variance?: Maybe<Emails_Histories_Variance_Fields>;
+};
+
+
+/** aggregate fields of "emails_histories" */
+export type Emails_Histories_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<Emails_Histories_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** aggregate avg on columns */
+export type Emails_Histories_Avg_Fields = {
+  __typename?: 'emails_histories_avg_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Boolean expression to filter rows from the table "emails_histories". All fields are combined with a logical 'AND'. */
+export type Emails_Histories_Bool_Exp = {
+  _and?: InputMaybe<Array<Emails_Histories_Bool_Exp>>;
+  _not?: InputMaybe<Emails_Histories_Bool_Exp>;
+  _or?: InputMaybe<Array<Emails_Histories_Bool_Exp>>;
+  created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  id?: InputMaybe<Int_Comparison_Exp>;
+  raw_json?: InputMaybe<String_Comparison_Exp>;
+  sent_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+  subject?: InputMaybe<String_Comparison_Exp>;
+  updated_at?: InputMaybe<Timestamptz_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "emails_histories" */
+export enum Emails_Histories_Constraint {
+  /** unique or primary key constraint on columns "id" */
+  EmailsHistoriesPkey = 'emails_histories_pkey'
+}
+
+/** input type for incrementing numeric columns in table "emails_histories" */
+export type Emails_Histories_Inc_Input = {
+  id?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "emails_histories" */
+export type Emails_Histories_Insert_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  raw_json?: InputMaybe<Scalars['String']>;
+  sent_at?: InputMaybe<Scalars['timestamptz']>;
+  subject?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate max on columns */
+export type Emails_Histories_Max_Fields = {
+  __typename?: 'emails_histories_max_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  raw_json?: Maybe<Scalars['String']>;
+  sent_at?: Maybe<Scalars['timestamptz']>;
+  subject?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** aggregate min on columns */
+export type Emails_Histories_Min_Fields = {
+  __typename?: 'emails_histories_min_fields';
+  created_at?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['Int']>;
+  raw_json?: Maybe<Scalars['String']>;
+  sent_at?: Maybe<Scalars['timestamptz']>;
+  subject?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** response of any mutation on the table "emails_histories" */
+export type Emails_Histories_Mutation_Response = {
+  __typename?: 'emails_histories_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Emails_Histories>;
+};
+
+/** on_conflict condition type for table "emails_histories" */
+export type Emails_Histories_On_Conflict = {
+  constraint: Emails_Histories_Constraint;
+  update_columns?: Array<Emails_Histories_Update_Column>;
+  where?: InputMaybe<Emails_Histories_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "emails_histories". */
+export type Emails_Histories_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  raw_json?: InputMaybe<Order_By>;
+  sent_at?: InputMaybe<Order_By>;
+  subject?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: emails_histories */
+export type Emails_Histories_Pk_Columns_Input = {
+  id: Scalars['Int'];
+};
+
+/** select columns of table "emails_histories" */
+export enum Emails_Histories_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  RawJson = 'raw_json',
+  /** column name */
+  SentAt = 'sent_at',
+  /** column name */
+  Subject = 'subject',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "emails_histories" */
+export type Emails_Histories_Set_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  raw_json?: InputMaybe<Scalars['String']>;
+  sent_at?: InputMaybe<Scalars['timestamptz']>;
+  subject?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate stddev on columns */
+export type Emails_Histories_Stddev_Fields = {
+  __typename?: 'emails_histories_stddev_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Emails_Histories_Stddev_Pop_Fields = {
+  __typename?: 'emails_histories_stddev_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Emails_Histories_Stddev_Samp_Fields = {
+  __typename?: 'emails_histories_stddev_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** Streaming cursor of the table "emails_histories" */
+export type Emails_Histories_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: Emails_Histories_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type Emails_Histories_Stream_Cursor_Value_Input = {
+  created_at?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['Int']>;
+  raw_json?: InputMaybe<Scalars['String']>;
+  sent_at?: InputMaybe<Scalars['timestamptz']>;
+  subject?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** aggregate sum on columns */
+export type Emails_Histories_Sum_Fields = {
+  __typename?: 'emails_histories_sum_fields';
+  id?: Maybe<Scalars['Int']>;
+};
+
+/** update columns of table "emails_histories" */
+export enum Emails_Histories_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  RawJson = 'raw_json',
+  /** column name */
+  SentAt = 'sent_at',
+  /** column name */
+  Subject = 'subject',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+export type Emails_Histories_Updates = {
+  /** increments the numeric columns with given value of the filtered values */
+  _inc?: InputMaybe<Emails_Histories_Inc_Input>;
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<Emails_Histories_Set_Input>;
+  where: Emails_Histories_Bool_Exp;
+};
+
+/** aggregate var_pop on columns */
+export type Emails_Histories_Var_Pop_Fields = {
+  __typename?: 'emails_histories_var_pop_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate var_samp on columns */
+export type Emails_Histories_Var_Samp_Fields = {
+  __typename?: 'emails_histories_var_samp_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
+/** aggregate variance on columns */
+export type Emails_Histories_Variance_Fields = {
+  __typename?: 'emails_histories_variance_fields';
+  id?: Maybe<Scalars['Float']>;
+};
+
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
+  /** delete data from the table: "emails_histories" */
+  delete_emails_histories?: Maybe<Emails_Histories_Mutation_Response>;
+  /** delete single row from the table: "emails_histories" */
+  delete_emails_histories_by_pk?: Maybe<Emails_Histories>;
   /** delete data from the table: "todos" */
   delete_todos?: Maybe<Todos_Mutation_Response>;
   /** delete single row from the table: "todos" */
@@ -94,6 +354,10 @@ export type Mutation_Root = {
   delete_users?: Maybe<Users_Mutation_Response>;
   /** delete single row from the table: "users" */
   delete_users_by_pk?: Maybe<Users>;
+  /** insert data into the table: "emails_histories" */
+  insert_emails_histories?: Maybe<Emails_Histories_Mutation_Response>;
+  /** insert a single row into the table: "emails_histories" */
+  insert_emails_histories_one?: Maybe<Emails_Histories>;
   /** insert data into the table: "todos" */
   insert_todos?: Maybe<Todos_Mutation_Response>;
   /** insert a single row into the table: "todos" */
@@ -102,6 +366,12 @@ export type Mutation_Root = {
   insert_users?: Maybe<Users_Mutation_Response>;
   /** insert a single row into the table: "users" */
   insert_users_one?: Maybe<Users>;
+  /** update data of the table: "emails_histories" */
+  update_emails_histories?: Maybe<Emails_Histories_Mutation_Response>;
+  /** update single row of the table: "emails_histories" */
+  update_emails_histories_by_pk?: Maybe<Emails_Histories>;
+  /** update multiples rows of table: "emails_histories" */
+  update_emails_histories_many?: Maybe<Array<Maybe<Emails_Histories_Mutation_Response>>>;
   /** update data of the table: "todos" */
   update_todos?: Maybe<Todos_Mutation_Response>;
   /** update single row of the table: "todos" */
@@ -114,6 +384,18 @@ export type Mutation_Root = {
   update_users_by_pk?: Maybe<Users>;
   /** update multiples rows of table: "users" */
   update_users_many?: Maybe<Array<Maybe<Users_Mutation_Response>>>;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Emails_HistoriesArgs = {
+  where: Emails_Histories_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Emails_Histories_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -142,6 +424,20 @@ export type Mutation_RootDelete_Users_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Emails_HistoriesArgs = {
+  objects: Array<Emails_Histories_Insert_Input>;
+  on_conflict?: InputMaybe<Emails_Histories_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Emails_Histories_OneArgs = {
+  object: Emails_Histories_Insert_Input;
+  on_conflict?: InputMaybe<Emails_Histories_On_Conflict>;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_TodosArgs = {
   objects: Array<Todos_Insert_Input>;
   on_conflict?: InputMaybe<Todos_On_Conflict>;
@@ -166,6 +462,28 @@ export type Mutation_RootInsert_UsersArgs = {
 export type Mutation_RootInsert_Users_OneArgs = {
   object: Users_Insert_Input;
   on_conflict?: InputMaybe<Users_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Emails_HistoriesArgs = {
+  _inc?: InputMaybe<Emails_Histories_Inc_Input>;
+  _set?: InputMaybe<Emails_Histories_Set_Input>;
+  where: Emails_Histories_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Emails_Histories_By_PkArgs = {
+  _inc?: InputMaybe<Emails_Histories_Inc_Input>;
+  _set?: InputMaybe<Emails_Histories_Set_Input>;
+  pk_columns: Emails_Histories_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Emails_Histories_ManyArgs = {
+  updates: Array<Emails_Histories_Updates>;
 };
 
 
@@ -230,6 +548,12 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
+  /** fetch data from the table: "emails_histories" */
+  emails_histories: Array<Emails_Histories>;
+  /** fetch aggregated fields from the table: "emails_histories" */
+  emails_histories_aggregate: Emails_Histories_Aggregate;
+  /** fetch data from the table: "emails_histories" using primary key columns */
+  emails_histories_by_pk?: Maybe<Emails_Histories>;
   /** fetch data from the table: "todos" */
   todos: Array<Todos>;
   /** fetch aggregated fields from the table: "todos" */
@@ -242,6 +566,29 @@ export type Query_Root = {
   users_aggregate: Users_Aggregate;
   /** fetch data from the table: "users" using primary key columns */
   users_by_pk?: Maybe<Users>;
+};
+
+
+export type Query_RootEmails_HistoriesArgs = {
+  distinct_on?: InputMaybe<Array<Emails_Histories_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Emails_Histories_Order_By>>;
+  where?: InputMaybe<Emails_Histories_Bool_Exp>;
+};
+
+
+export type Query_RootEmails_Histories_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Emails_Histories_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Emails_Histories_Order_By>>;
+  where?: InputMaybe<Emails_Histories_Bool_Exp>;
+};
+
+
+export type Query_RootEmails_Histories_By_PkArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -292,6 +639,14 @@ export type Query_RootUsers_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
+  /** fetch data from the table: "emails_histories" */
+  emails_histories: Array<Emails_Histories>;
+  /** fetch aggregated fields from the table: "emails_histories" */
+  emails_histories_aggregate: Emails_Histories_Aggregate;
+  /** fetch data from the table: "emails_histories" using primary key columns */
+  emails_histories_by_pk?: Maybe<Emails_Histories>;
+  /** fetch data from the table in a streaming manner: "emails_histories" */
+  emails_histories_stream: Array<Emails_Histories>;
   /** fetch data from the table: "todos" */
   todos: Array<Todos>;
   /** fetch aggregated fields from the table: "todos" */
@@ -308,6 +663,36 @@ export type Subscription_Root = {
   users_by_pk?: Maybe<Users>;
   /** fetch data from the table in a streaming manner: "users" */
   users_stream: Array<Users>;
+};
+
+
+export type Subscription_RootEmails_HistoriesArgs = {
+  distinct_on?: InputMaybe<Array<Emails_Histories_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Emails_Histories_Order_By>>;
+  where?: InputMaybe<Emails_Histories_Bool_Exp>;
+};
+
+
+export type Subscription_RootEmails_Histories_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Emails_Histories_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Emails_Histories_Order_By>>;
+  where?: InputMaybe<Emails_Histories_Bool_Exp>;
+};
+
+
+export type Subscription_RootEmails_Histories_By_PkArgs = {
+  id: Scalars['Int'];
+};
+
+
+export type Subscription_RootEmails_Histories_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<Emails_Histories_Stream_Cursor_Input>>;
+  where?: InputMaybe<Emails_Histories_Bool_Exp>;
 };
 
 
@@ -898,12 +1283,12 @@ export type InsertTodoMutationVariables = Exact<{
 }>;
 
 
-export type InsertTodoMutation = { __typename?: 'mutation_root', insert_todos?: { __typename?: 'todos_mutation_response', returning: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, created_at: any, updated_at: any }> } | null };
+export type InsertTodoMutation = { __typename?: 'mutation_root', insert_todos?: { __typename?: 'todos_mutation_response', returning: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, created_at: any, updated_at: any, user: { __typename?: 'users', id: number, name: string, email: string, password: string, created_at: any, updated_at: any } }> } | null };
 
 export type FetchTodosQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FetchTodosQuery = { __typename?: 'query_root', todos: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, created_at: any, updated_at: any }> };
+export type FetchTodosQuery = { __typename?: 'query_root', todos: Array<{ __typename?: 'todos', id: number, title: string, is_completed: boolean, user_id: number, created_at: any, updated_at: any, user: { __typename?: 'users', id: number, name: string, email: string, password: string, created_at: any, updated_at: any } }> };
 
 export type UpdateTodoMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -912,7 +1297,7 @@ export type UpdateTodoMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTodoMutation = { __typename?: 'mutation_root', update_todos_by_pk?: { __typename?: 'todos', id: number, created_at: any, is_completed: boolean, user_id: number, title: string, updated_at: any } | null };
+export type UpdateTodoMutation = { __typename?: 'mutation_root', update_todos_by_pk?: { __typename?: 'todos', id: number, created_at: any, is_completed: boolean, user_id: number, title: string, updated_at: any, user: { __typename?: 'users', id: number, name: string, email: string, password: string, created_at: any, updated_at: any } } | null };
 
 export type DeleteTodoMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -944,6 +1329,14 @@ export const InsertTodoDocument = gql`
       user_id
       created_at
       updated_at
+      user {
+        id
+        name
+        email
+        password
+        created_at
+        updated_at
+      }
     }
   }
 }
@@ -984,6 +1377,14 @@ export const FetchTodosDocument = gql`
     user_id
     created_at
     updated_at
+    user {
+      id
+      name
+      email
+      password
+      created_at
+      updated_at
+    }
   }
 }
     `;
@@ -1026,6 +1427,14 @@ export const UpdateTodoDocument = gql`
     user_id
     title
     updated_at
+    user {
+      id
+      name
+      email
+      password
+      created_at
+      updated_at
+    }
   }
 }
     `;

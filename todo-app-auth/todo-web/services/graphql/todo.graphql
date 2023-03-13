@@ -7,18 +7,34 @@ mutation InsertTodo($title: String!, $is_completed: Boolean!) {
       user_id
       created_at
       updated_at
+      user {
+        id
+        name
+        email
+        password
+        created_at
+        updated_at
+      }
     }
   }
 }
 
 query FetchTodos {
-  todos(order_by:{id: asc}) {
+  todos(order_by: { id: asc }) {
     id
     title
     is_completed
     user_id
     created_at
     updated_at
+    user {
+      id
+      name
+      email
+      password
+      created_at
+      updated_at
+    }
   }
 }
 
@@ -33,6 +49,14 @@ mutation UpdateTodo($id: Int!, $title: String, $is_completed: Boolean) {
     user_id
     title
     updated_at
+    user {
+      id
+      name
+      email
+      password
+      created_at
+      updated_at
+    }
   }
 }
 
