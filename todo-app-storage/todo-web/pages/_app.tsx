@@ -5,12 +5,12 @@ import { ApolloProvider } from "@apollo/client";
 import { createApolloClient } from "../services/apolloClient";
 import { DataProvider } from "../context/data";
 
-import { GlueProvider } from "@gluestack/glue-client-sdk-react";
-import glue from "../glue";
+import { GlueProvider, Glue } from "@gluestack/glue-client-sdk-react";
 import Toast from "../components/Toast";
 import { AppProvider } from "../context/app";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const glue = new Glue({BASE_URL: process.env.BASE_URL || ""});
   return (
     <>
       <GlueProvider glue={glue}>

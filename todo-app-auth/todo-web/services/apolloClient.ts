@@ -4,7 +4,7 @@ export function createApolloClient(token?: string | undefined | null) {
   if (token) {
     return new ApolloClient({
       ssrMode: false,
-      uri: (process.env.NEXT_PUBLIC_API_URL ?? "").replaceAll("localhost", "host.docker.internal"),
+      uri: process.env.NEXT_PUBLIC_API_URL,
       cache: new InMemoryCache(),
       headers: {
         authorization: `Bearer ${token}`,
@@ -13,7 +13,7 @@ export function createApolloClient(token?: string | undefined | null) {
   } else {
     return new ApolloClient({
       ssrMode: false,
-      uri: (process.env.NEXT_PUBLIC_API_URL ?? "").replaceAll("localhost", "host.docker.internal"),
+      uri: process.env.NEXT_PUBLIC_API_URL,
       cache: new InMemoryCache(),
     });
   }

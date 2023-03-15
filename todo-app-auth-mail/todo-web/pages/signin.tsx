@@ -5,11 +5,11 @@ import Button from '../components/Button';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { getUser } from '../context/user';
-import { Glue } from "@gluestack/glue-client-sdk-react";
+import { useGlue } from "@gluestack/glue-client-sdk-react";
 import { ILoginWithEmailPasswordArgs } from "@gluestack/glue-client-sdk-js/src/auth/interfaces/IAuth";
 
-const signin = ({ BASE_URL }: { BASE_URL: string }) => {
-  const glue = new Glue({BASE_URL: BASE_URL});
+const signin = () => {
+  const { glue } = useGlue([]);
   const router = useRouter();
   const { updateUser }: any = getUser();
   const [formData, setFormData] = React.useState<ILoginWithEmailPasswordArgs>({

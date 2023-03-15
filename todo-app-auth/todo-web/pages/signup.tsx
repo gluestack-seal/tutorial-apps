@@ -5,11 +5,11 @@ import Button from "../components/Button";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { getUser } from "../context/user";
-import { Glue } from "@gluestack/glue-client-sdk-react";
+import { useGlue } from "@gluestack/glue-client-sdk-react";
 import { ISignupWithEmail } from "@gluestack/glue-client-sdk-js/src/auth/interfaces/IAuth";
 
-const signup = ({ BASE_URL }: { BASE_URL: string }) => {
-  const glue = new Glue({BASE_URL: BASE_URL});
+const signup = () => {
+  const { glue } = useGlue([]);
   const router = useRouter();
   const { updateUser }: any = getUser();
   const [formData, setFormData] = React.useState<ISignupWithEmail>({
@@ -113,11 +113,3 @@ const signup = ({ BASE_URL }: { BASE_URL: string }) => {
 };
 
 export default signup;
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      BASE_URL: process.env.APP_BASE_URL,
-    },
-  };
-}
