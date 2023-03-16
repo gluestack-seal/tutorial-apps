@@ -1,6 +1,6 @@
 const path = require("path");
 const dotenv = require("dotenv");
-dotenv.config({ path: path.join(__dirname, "./.env") });
+dotenv.config({ path: path.join(__dirname, "./.env.generated") });
 
 let host = `${process.env.MINIO_ADMIN_END_POINT}`;
 if (process.env.MINIO_PORT !== "443") {
