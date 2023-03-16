@@ -19,8 +19,8 @@
     "@gluestack/glue-plugin-auth": "^0.0.50",
     "@gluestack/glue-plugin-backend-engine": "^0.0.51",
     "@gluestack/glue-plugin-engine": "^0.0.x",
-    "@gluestack/glue-plugin-graphql": "^0.0.43",
-    "@gluestack/glue-plugin-postgres": "^0.0.26",
+    "@gluestack/glue-plugin-graphql": "^0.0.44",
+    "@gluestack/glue-plugin-postgres": "^0.0.27",
     "@gluestack/glue-plugin-router-nginx": "^0.0.x",
     "@gluestack/glue-plugin-web": "^0.1.30"
   },
