@@ -1,6 +1,6 @@
 {
   "status": "down",
-  "port_number": 5433,
+  "port_number": 5432,
   "container_id": null,
   "db_config": {
     "external": false,
@@ -8,6 +8,6 @@
     "username": "postgres",
     "password": "postgrespass",
     "db_host": "host.docker.internal",
-    "db_port": "5433"
+    "db_port": "5432"
   }
 }

@@ -10,5 +10,5 @@ EXPOSE 9000
 # Install npm dependencies
 RUN ["npm", "install"]
 
-# Run the app using Dapr
+# Run the app
 CMD ["sh", "-c", "npm run dev -- -p 9000"]
