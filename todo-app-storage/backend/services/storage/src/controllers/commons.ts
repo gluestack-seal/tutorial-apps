@@ -24,6 +24,26 @@ class Commons {
   }
 
   /**
+   * Graphql request
+   */
+  public async AuthGQLRequest({ variables, query, token }: any) {
+    const headers = {
+      "content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    };
+
+    return await this.axios({
+      url: `${Locals.config().hasuraGraphqlURL}`,
+      method: "POST",
+      headers: headers,
+      data: {
+        query,
+        variables,
+      },
+    });
+  }
+
+  /**
    * Server response
    */
   public Response(res: any, success: boolean, message: string, data: any) {

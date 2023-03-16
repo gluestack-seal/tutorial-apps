@@ -5,6 +5,8 @@ const multer = require("multer");
 import Controller from "../controllers/storage/handlers";
 import Locals from "../providers/locals";
 
+import myMiddleware from "../middlewares";
+
 const router = Router();
 
 /**
@@ -17,6 +19,6 @@ const upload = multer({
 });
 
 router.post("/upload", upload.single("file"), Controller.upload);
-router.get("/get/:id", Controller.get);
+router.get("/get/:id", myMiddleware, Controller.get);
 
 export default router;
