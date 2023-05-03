@@ -1,0 +1,14 @@
+container_name: todoweb
+stateless: true
+platforms:
+  local:
+    envfile: .env.tpl
+    build: npm install && npm run dev
+  docker:
+    envfile: .env.tpl
+    build: ./run.Dockerfile
+    ports:
+      - 3001:3000
+    volumes:
+      - :/app
+      - /app/todo-web/node_modules/

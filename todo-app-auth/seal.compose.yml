@@ -1,0 +1,81 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: postgres
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/databases/postgres
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/databases/postgres/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/databases/postgres/.env
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - psql -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 10s
+      timeout: 10s
+      retries: 50
+      start_period: 30s
+    ports:
+      - 5432:5432
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/databases/postgres/db:/var/lib/postgresql/data/
+  graphql:
+    container_name: graphql
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/services/graphql
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/services/graphql/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/services/graphql/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/services/graphql:/hasura
+  engine:
+    container_name: engine
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/engine
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/engine/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/engine/.env
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/engine:/server
+      - /server/node_modules
+  auth:
+    container_name: auth
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/services/auth
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/services/auth/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/services/auth/.env
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/backend/services/auth:/server
+      - /server/node_modules
+  todoweb:
+    container_name: todoweb
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/todo-web
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/todo-web/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/todo-web/.env
+    ports:
+      - 3001:3000
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth:/app
+      - /app/todo-web/node_modules/
+  nginx:
+    container_name: nginx
+    restart: always
+    build: /Users/shivamsinghal/Sites/projects/seal/cli/build/templates/nginx
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth/seal.nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 10088:10088
+      - 7001:7001
