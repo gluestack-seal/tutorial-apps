@@ -49,6 +49,13 @@ seal down
 cd todo-app-storage
 seal up
 
+Browse to http://localhost:9160/
+Credentails:
+user: gluestack
+password: password
+
+Create a bucket `public` manually with `public` policy
+
 Browse to http://localhost:7001/
 
 seal down
