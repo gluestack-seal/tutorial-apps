@@ -1,0 +1,30 @@
+envfile: .env.tpl
+project_id: "1683092357863"
+project_name: todo-app
+default_runner: docker
+services:
+  postgres:
+    path: backend/databases/postgres
+  graphql:
+    path: backend/services/graphql
+  todoweb:
+    path: todo-web
+ingress:
+  - domain: api.local.gluestack.io
+    port: 10088
+    options:
+      - location: /backend/graphql
+        rewrite_key: ^/backend/graphql
+        rewrite_value: /v1/graphql
+        proxy_pass: http://graphql:8080
+      - location: /backend/hasura
+        rewrite_key: ^/backend/hasura/(.*)
+        rewrite_value: /$1
+        proxy_pass: http://graphql:8080
+  - domain: todoweb.local.gluestack.io
+    port: 7001
+    options:
+      - location: /
+        rewrite_key: ^/(.*)
+        rewrite_value: /$1
+        proxy_pass: http://todoweb:3000

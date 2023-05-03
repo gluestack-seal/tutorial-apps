@@ -1,0 +1,18 @@
+container_name: postgres
+stateless: false
+platforms:
+  docker:
+    envfile: .env.tpl
+    build: ./run.Dockerfile
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - psql -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 10s
+      timeout: 10s
+      retries: 50
+      start_period: 30s
+    ports:
+      - 5432:5432
+    volumes:
+      - backend/databases/postgres/db:/var/lib/postgresql/data/

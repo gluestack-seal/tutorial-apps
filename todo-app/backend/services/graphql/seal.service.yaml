@@ -1,0 +1,14 @@
+container_name: graphql
+stateless: false
+platforms:
+  docker:
+    envfile: .env.tpl
+    build: ./run.Dockerfile
+    ports:
+      - 8080:8080
+    volumes:
+      - backend/services/graphql:/hasura
+    # uncomment this if depends on postgres service
+    depends_on:
+      postgres:
+        condition: service_healthy
