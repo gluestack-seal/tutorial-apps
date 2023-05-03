@@ -1,0 +1,12 @@
+container_name: auth
+stateless: true
+platforms:
+  local:
+    envfile: .env.tpl
+    build: npm install && node app.js
+  docker:
+    envfile: .env.tpl
+    build: ./run.Dockerfile
+    volumes:
+      - backend/services/auth:/server
+      - /server/node_modules

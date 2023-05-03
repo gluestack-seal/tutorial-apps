@@ -1,0 +1,103 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: postgres
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/databases/postgres
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/databases/postgres/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/databases/postgres/.env
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - psql -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 10s
+      timeout: 10s
+      retries: 50
+      start_period: 30s
+    ports:
+      - 5432:5432
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/databases/postgres/db:/var/lib/postgresql/data/
+  graphql:
+    container_name: graphql
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/graphql
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/graphql/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/graphql/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/graphql:/hasura
+  engine:
+    container_name: engine
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/engine
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/engine/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/engine/.env
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/engine:/server
+      - /server/node_modules
+  auth:
+    container_name: auth
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/auth
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/auth/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/auth/.env
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/auth:/server
+      - /server/node_modules
+  todoweb:
+    container_name: todoweb
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/todo-web
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/todo-web/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/todo-web/.env
+    ports:
+      - 3001:3000
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail:/app
+      - /app/todo-web/node_modules/
+  authservices:
+    container_name: authservices
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/auth-services
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/auth-services/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/auth-services/.env
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/auth-services:/server
+      - /server/node_modules
+  nodemailer:
+    container_name: nodemailer
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer/.env
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/backend/services/nodemailer:/server
+      - /server/node_modules
+  nginx:
+    container_name: nginx
+    restart: always
+    build: /Users/shivamsinghal/Sites/projects/seal/cli/build/templates/nginx
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-auth-mail/seal.nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 10088:10088
+      - 7001:7001

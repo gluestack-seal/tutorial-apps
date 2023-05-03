@@ -1,0 +1,54 @@
+envfile: .env.tpl
+project_id: "1683106496672"
+project_name: todo-app-auth
+default_runner: docker
+services:
+  postgres:
+    path: backend/databases/postgres
+  graphql:
+    path: backend/services/graphql
+  engine:
+    path: backend/engine
+  auth:
+    path: backend/services/auth
+  todoweb:
+    path: todo-web
+  authservices:
+    path: backend/services/auth-services
+  nodemailer:
+    path: backend/services/nodemailer
+ingress:
+  - domain: api.local.gluestack.io
+    port: 10088
+    options:
+      - location: /backend/auth
+        rewrite_key: ^/backend/auth/(.*)
+        rewrite_value: /v1.0/invoke/auth/method/$1
+        proxy_pass: http://auth:3500
+      - location: /backend/authservices
+        rewrite_key: ^/backend/authservices/(.*)
+        rewrite_value: /v1.0/invoke/authservices/method/$1
+        proxy_pass: http://authservices:3500
+      - location: /backend/nodemailer
+        rewrite_key: ^/backend/nodemailer/(.*)
+        rewrite_value: /v1.0/invoke/nodemailer/method/$1
+        proxy_pass: http://nodemailer:3500
+      - location: /backend/engine
+        rewrite_key: ^/backend/engine/(.*)
+        rewrite_value: /v1.0/invoke/engine/method/$1
+        proxy_pass: http://engine:3500
+      - location: /backend/graphql
+        rewrite_key: ^/backend/graphql
+        rewrite_value: /v1/graphql
+        proxy_pass: http://graphql:8080
+      - location: /backend/hasura
+        rewrite_key: ^/backend/hasura/(.*)
+        rewrite_value: /$1
+        proxy_pass: http://graphql:8080
+  - domain: todoweb.local.gluestack.io
+    port: 7001
+    options:
+      - location: /
+        rewrite_key: ^/(.*)
+        rewrite_value: /$1
+        proxy_pass: http://todoweb:3000
