@@ -1,6 +1,6 @@
 envfile: .env.tpl
-project_id: "1683106496672"
-project_name: todo-app-auth
+project_id: "1683115359048"
+project_name: todo-app-auth-mail
 default_runner: docker
 services:
   postgres:
