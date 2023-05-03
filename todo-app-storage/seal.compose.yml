@@ -1,0 +1,92 @@
+version: "3.9"
+services:
+  postgres:
+    container_name: postgres
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/databases/postgres
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/databases/postgres/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/databases/postgres/.env
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - psql -U $$POSTGRES_USER -d $$POSTGRES_DB
+      interval: 10s
+      timeout: 10s
+      retries: 50
+      start_period: 30s
+    ports:
+      - 5432:5432
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/databases/postgres/db:/var/lib/postgresql/data/
+  graphql:
+    container_name: graphql
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/services/graphql
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/services/graphql/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/services/graphql/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/services/graphql:/hasura
+  todoweb:
+    container_name: todoweb
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/todo-web
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/todo-web/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/todo-web/.env
+    ports:
+      - 3001:3000
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage:/app
+      - /app/todo-web/node_modules/
+  storage:
+    container_name: storage
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/services/storage
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/services/storage/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/services/storage/.env
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/services/storage:/server
+      - /server/node_modules
+  minio:
+    container_name: minio
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/storage/minio
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/storage/minio/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/storage/minio/.env
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://minio:9000/minio/health/live
+      interval: 5s
+      timeout: 2s
+      retries: 20
+    ports:
+      - 10310:9000
+      - 9160:9001
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/backend/storage/minio/data:/data
+  nginx:
+    container_name: nginx
+    restart: always
+    build: /Users/shivamsinghal/Sites/projects/seal/cli/build/templates/nginx
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app-storage/seal.nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - 10088:10088
+      - 7001:7001

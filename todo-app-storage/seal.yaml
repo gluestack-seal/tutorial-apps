@@ -1,0 +1,43 @@
+envfile: .env.tpl
+project_id: "1683111654641"
+project_name: todo-app-storage
+default_runner: docker
+services:
+  postgres:
+    path: backend/databases/postgres
+  graphql:
+    path: backend/services/graphql
+  todoweb:
+    path: todo-web
+  storage:
+    path: backend/services/storage
+  minio:
+    path: backend/storage/minio
+ingress:
+  - domain: api.local.gluestack.io
+    port: 10088
+    options:
+      - location: /backend/storage/upload
+        rewrite_key: ^/backend/storage/upload
+        rewrite_value: /upload
+        proxy_pass: http://storage:9000
+      - location: /backend/storage/file
+        rewrite_key: ^/backend/storage/file/(.*)
+        rewrite_value: /$1
+        proxy_set_header_host: host.docker.internal:10310
+        proxy_pass: http://host.docker.internal:10310
+      - location: /backend/graphql
+        rewrite_key: ^/backend/graphql
+        rewrite_value: /v1/graphql
+        proxy_pass: http://graphql:8080
+      - location: /backend/hasura
+        rewrite_key: ^/backend/hasura/(.*)
+        rewrite_value: /$1
+        proxy_pass: http://graphql:8080
+  - domain: todoweb.local.gluestack.io
+    port: 7001
+    options:
+      - location: /
+        rewrite_key: ^/(.*)
+        rewrite_value: /$1
+        proxy_pass: http://todoweb:3000

@@ -1,0 +1,20 @@
+container_name: minio
+stateless: false
+platforms:
+  docker:
+    envfile: .env.tpl
+    build: ./run.Dockerfile
+    ports:
+      - 10310:9000
+      - 9160:9001
+    volumes:
+      - backend/storage/minio/data:/data
+    healthcheck:
+      test:
+        - CMD
+        - curl
+        - -f
+        - http://minio:9000/minio/health/live
+      interval: 5s
+      timeout: 2s
+      retries: 20
