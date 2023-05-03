@@ -19,10 +19,14 @@ EXPOSE 8080
 # Start Hasura GraphQL Engine and run Hasura commands
 CMD /bin/bash -c "graphql-engine serve & \
     sleep 5s && \
-    echo 'Clearing metadata...' && \
+    echo '#1 Clearing metadata...' && \
     hasura metadata clear --skip-update-check && \
-    echo 'Applying migrations...' && \
+    echo '#2 Applying metadata...' && \
+    hasura metadata apply --skip-update-check && \
+    echo '#3 Applying migrations...' && \
     hasura migrate apply --all-databases --skip-update-check && \
-    echo 'Applying metadata ...' && \
+    echo '#4 Clearing metadata...' && \
+    hasura metadata clear --skip-update-check && \
+    echo '#5 Applying metadata...' && \
     hasura metadata apply --skip-update-check && \
     tail -f /dev/null"
