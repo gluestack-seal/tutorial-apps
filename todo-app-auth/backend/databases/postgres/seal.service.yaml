@@ -2,7 +2,7 @@ container_name: postgres
 stateless: false
 platforms:
   docker:
-    envfile: .env.tpl
+    envfile: .env
     build: ./run.Dockerfile
     healthcheck:
       test:

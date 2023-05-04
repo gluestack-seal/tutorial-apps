@@ -2,10 +2,10 @@ container_name: authservices
 stateless: true
 platforms:
   local:
-    envfile: .env.tpl
+    envfile: .env
     build: npm install && node app.js
   docker:
-    envfile: .env.tpl
+    envfile: .env
     build: ./run.Dockerfile
     volumes:
       - backend/services/auth-services:/server
