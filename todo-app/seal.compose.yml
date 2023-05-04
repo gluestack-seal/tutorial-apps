@@ -1,41 +1,11 @@
 version: "3.9"
 services:
-  todoweb:
-    container_name: todoweb
-    restart: always
-    build:
-      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/todo-web
-      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/todo-web/run.Dockerfile
-    volumes:
-      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app:/app
-      - /app/todo-web/node_modules/
-    env_file:
-      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/todo-web/.env
-    ports:
-      - 3001:3000
-  graphql:
-    container_name: graphql
-    restart: always
-    build:
-      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/services/graphql
-      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/services/graphql/run.Dockerfile
-    volumes:
-      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/services/graphql:/hasura
-    env_file:
-      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/services/graphql/.env
-    depends_on:
-      postgres:
-        condition: service_healthy
-    ports:
-      - 8080:8080
   postgres:
     container_name: postgres
     restart: always
     build:
       context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/databases/postgres
       dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/databases/postgres/run.Dockerfile
-    volumes:
-      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/databases/postgres/db:/var/lib/postgresql/data/
     env_file:
       - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/databases/postgres/.env
     healthcheck:
@@ -48,6 +18,36 @@ services:
       start_period: 30s
     ports:
       - 5432:5432
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/databases/postgres/db:/var/lib/postgresql/data/
+  graphql:
+    container_name: graphql
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/services/graphql
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/services/graphql/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/services/graphql/.env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - 8080:8080
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/backend/services/graphql:/hasura
+  todoweb:
+    container_name: todoweb
+    restart: always
+    build:
+      context: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/todo-web
+      dockerfile: /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/todo-web/run.Dockerfile
+    env_file:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app/todo-web/.env
+    ports:
+      - 3001:3000
+    volumes:
+      - /Users/shivamsinghal/Sites/projects/seal/sample-projects/tutorial-apps/todo-app:/app
+      - /app/todo-web/node_modules/
   nginx:
     container_name: nginx
     restart: always
